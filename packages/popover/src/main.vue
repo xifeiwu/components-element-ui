@@ -90,6 +90,9 @@ export default {
       reference.setAttribute('aria-describedby', this.tooltipId);
       reference.setAttribute('tabindex', 0); // tab序列
       popper.setAttribute('tabindex', 0);
+      if (this.trigger === 'manual') {
+        return;
+      }
 
       if (this.trigger !== 'click') {
         on(reference, 'focusin', () => {
