@@ -69,7 +69,7 @@
       class="el-range-input">
     <i
       @click="handleClickIcon"
-      v-if="haveTrigger"
+      v-if="haveTrigger && enableClose"
       :class="{ 'el-icon-circle-close': showClose }"
       class="el-input__icon el-range__close-icon">
     </i>
@@ -325,6 +325,10 @@ export default {
     },
     popperClass: String,
     editable: {
+      type: Boolean,
+      default: true
+    },
+    enableClose: {
       type: Boolean,
       default: true
     },
