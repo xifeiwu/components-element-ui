@@ -29,6 +29,7 @@
       :style="[bodyHeight]">
       <el-scrollbar style="height: 100%;" ref="scrollBar">
         <table-body
+          v-clickoutside="handleClickOutside"
           :context="context"
           :store="store"
           :stripe="stripe"
@@ -166,6 +167,7 @@
   import TableHeader from './table-header';
   import TableFooter from './table-footer';
   import { mousewheel } from './util';
+  import Clickoutside from 'element-ui/src/utils/clickoutside';
 
   let tableIdSeed = 1;
 
@@ -173,6 +175,7 @@
     name: 'ElTable',
 
     mixins: [Locale, Migrating],
+    directives: { Clickoutside },
 
     props: {
       data: {
@@ -371,6 +374,10 @@
           }
           this.$refs.hasOwnProperty('scrollBar') && this.$refs['scrollBar'].reset();
         });
+      },
+
+      handleClickOutside() {
+        this.store.states.currentRow = null;
       }
     },
 
