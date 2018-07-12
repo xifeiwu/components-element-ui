@@ -3,7 +3,8 @@
 
 @include b(notification) {
   display: flex;
-  width: $--notification-width;
+  width: auto;
+  max-width: $--notification-max-width;
   padding: $--notification-padding;
   border-radius: $--notification-raduis;
   box-sizing: border-box;
