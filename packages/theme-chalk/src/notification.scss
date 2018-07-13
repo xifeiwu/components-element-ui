@@ -4,6 +4,7 @@
 @include b(notification) {
   display: flex;
   width: auto;
+  min-width: $--notification-min-width;
   max-width: $--notification-max-width;
   padding: $--notification-padding;
   border-radius: $--notification-raduis;
