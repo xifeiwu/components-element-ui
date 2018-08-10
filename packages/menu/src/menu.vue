@@ -1,17 +1,15 @@
 <template>
-  <el-menu-collapse-transition>
-    <ul class="el-menu"
-      :key="+collapse"
-      :style="{ backgroundColor: backgroundColor || '' }"
-      :class="{
-        'el-menu--horizontal': mode === 'horizontal',
-        'el-menu--collapse': collapse
-      }"
-      role="menubar"
-    >
-      <slot></slot>
-    </ul>
-  </el-menu-collapse-transition>
+  <ul class="el-menu"
+    :key="+collapse"
+    :style="{ backgroundColor: backgroundColor || '' }"
+    :class="{
+      'el-menu--horizontal': mode === 'horizontal',
+      'el-menu--collapse': collapse
+    }"
+    role="menubar"
+  >
+    <slot></slot>
+  </ul>
 </template>
 <script>
   import emitter from 'element-ui/src/mixins/emitter';
