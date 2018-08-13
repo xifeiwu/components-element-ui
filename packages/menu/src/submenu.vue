@@ -180,7 +180,7 @@
         this.$refs['submenu-title'].style.backgroundColor = this.rootMenu.backgroundColor || '';
       }
     },
-    created() {
+    mounted() {
       this.parentMenu.addSubmenu(this);
       this.rootMenu.addSubmenu(this);
     },
