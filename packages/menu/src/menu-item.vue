@@ -104,7 +104,7 @@
         this.$emit('click', this);
       }
     },
-    mounted() {
+    created() {
       this.parentMenu.addItem(this);
       this.rootMenu.addItem(this);
     },

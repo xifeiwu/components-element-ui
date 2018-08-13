@@ -1,4 +1,19 @@
-<script type="text/jsx">
+<template>
+  <el-menu-collapse-transition>
+    <ul class="el-menu"
+      :key="+collapse"
+      :style="{ backgroundColor: backgroundColor || '' }"
+      :class="{
+        'el-menu--horizontal': mode === 'horizontal',
+        'el-menu--collapse': collapse
+      }"
+      role="menubar"
+    >
+      <slot></slot>
+    </ul>
+  </el-menu-collapse-transition>
+</template>
+<script>
   import emitter from 'element-ui/src/mixins/emitter';
   import Migrating from 'element-ui/src/mixins/migrating';
   import Menubar from 'element-ui/src/utils/menu/aria-menubar';
@@ -8,33 +23,6 @@
     name: 'ElMenu',
 
     componentName: 'ElMenu',
-
-    render (h) {
-      const component = (
-        <ul
-          role="menubar"
-          key={ +this.collapse }
-          style={{ backgroundColor: this.backgroundColor || '' }}
-          class={{
-            'el-menu--horizontal': this.mode === 'horizontal',
-            'el-menu--collapse': this.collapse,
-            "el-menu": true
-          }}
-        >
-          { this.$slots.default }
-        </ul>
-      );
-
-      if (this.collapseTransition) {
-        return (
-          <el-menu-collapse-transition>
-            { component }
-          </el-menu-collapse-transition>
-        );
-      } else {
-        return component;
-      }
-    },
 
     mixins: [emitter, Migrating],
 
@@ -126,11 +114,7 @@
       collapse: Boolean,
       backgroundColor: String,
       textColor: String,
-      activeTextColor: String,
-      collapseTransition: {
-        type: Boolean,
-        default: true
-      }
+      activeTextColor: String
     },
     data() {
       return {
@@ -154,6 +138,7 @@
         } else {
           this.activeIndex = '';
         }
+
       },
       defaultOpeneds(value) {
         this.openedMenus = value;
