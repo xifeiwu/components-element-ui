@@ -100,6 +100,10 @@
         type: String,
         default: 'vertical'
       },
+      setActiveIndexByDefaultActive: {
+        type: Boolean,
+        default: false
+      },
       defaultActive: {
         type: String,
         default: ''
@@ -234,7 +238,9 @@
       },
       handleItemClick(item) {
         let { index, indexPath } = item;
-        this.activeIndex = item.index;
+        if (!this.setActiveIndexByDefaultActive) {
+          this.activeIndex = item.index;
+        }
         this.$emit('select', index, indexPath, item);
 
         if (this.mode === 'horizontal' || this.collapse) {
