@@ -156,7 +156,7 @@
         clearTimeout(this.timeout);
         this.timeout = setTimeout(() => {
           this.rootMenu.openMenu(this.index, this.indexPath);
-        }, 300);
+        }, 10);
       },
       handleMouseleave() {
         const {rootMenu} = this;
@@ -169,7 +169,7 @@
         clearTimeout(this.timeout);
         this.timeout = setTimeout(() => {
           this.rootMenu.closeMenu(this.index);
-        }, 1000);
+        }, 200);
       },
       handleTitleMouseenter() {
         if (this.mode === 'horizontal' && !this.rootMenu.backgroundColor) return;

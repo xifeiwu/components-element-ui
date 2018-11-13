@@ -118,7 +118,7 @@
     }
   }
   @include m(collapse) {
-    width: 64px;
+    width: 56px;
 
     > .el-menu-item,
     > .el-submenu > .el-submenu__title {
@@ -211,7 +211,7 @@
       vertical-align: middle;
     }
 
-    i {
+    i.el-submenu__icon-arrow {
       color: $--color-text-secondary;
     }
 
@@ -225,7 +225,7 @@
   & .el-menu-item {
     height: 50px;
     line-height: 50px;
-    padding: 0 45px;
+    //padding: 0 45px;
     min-width: 200px;
   }
   @include e(icon-arrow) {
