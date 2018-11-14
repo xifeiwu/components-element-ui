@@ -169,7 +169,7 @@ export default {
 
   computed: {
     table() {
-      return this.$parent.$parent;
+      return this.$parent;
     },
 
     data() {

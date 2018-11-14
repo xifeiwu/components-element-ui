@@ -27,25 +27,23 @@
       ref="bodyWrapper"
       :class="[`is-scroll-${scrollPosition}`]"
       :style="[bodyHeight]">
-      <el-scrollbar style="height: 100%;" ref="scrollBar">
-        <table-body
-          v-clickoutside="handleClickOutside"
-          :context="context"
-          :store="store"
-          :stripe="stripe"
-          :layout="layout"
-          :row-class-name="rowClassName"
-          :row-style="rowStyle"
-          :highlight="highlightCurrentRow"
-          :style="{ width: bodyWidth }">
-        </table-body>
-        <div :style="{ width: bodyWidth }" class="el-table__empty-block" v-if="!data || data.length === 0">
-          <span class="el-table__empty-text"><slot name="empty">{{ emptyText || t('el.table.emptyText') }}</slot></span>
-        </div>
-        <div class="el-table__append-wrapper" ref="appendWrapper" v-if="$slots.append">
-          <slot name="append"></slot>
-        </div>
-      </el-scrollbar>
+      <table-body
+        v-clickoutside="handleClickOutside"
+        :context="context"
+        :store="store"
+        :stripe="stripe"
+        :layout="layout"
+        :row-class-name="rowClassName"
+        :row-style="rowStyle"
+        :highlight="highlightCurrentRow"
+        :style="{ width: bodyWidth }">
+      </table-body>
+      <div :style="{ width: bodyWidth }" class="el-table__empty-block" v-if="!data || data.length === 0">
+        <span class="el-table__empty-text"><slot name="empty">{{ emptyText || t('el.table.emptyText') }}</slot></span>
+      </div>
+      <div class="el-table__append-wrapper" ref="appendWrapper" v-if="$slots.append">
+        <slot name="append"></slot>
+      </div>
     </div>
     <div class="el-table__footer-wrapper" ref="footerWrapper" v-if="showSummary" v-show="data && data.length > 0">
       <table-footer
