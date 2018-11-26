@@ -20,6 +20,7 @@
         v-if="type !== 'textarea'"
         class="el-input__inner"
         v-bind="$props"
+        :type="type"
         :autocomplete="autoComplete"
         :value="currentValue"
         ref="input"
