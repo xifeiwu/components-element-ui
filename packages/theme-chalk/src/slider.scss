@@ -7,6 +7,28 @@
 @include b(slider) {
   @include utils-clearfix;
 
+  @include m(small) {
+    @include e(runway) {
+      height: $--slider-height-small;
+      border-radius: $--slider-border-radius-small;
+      margin: $--slider-margin-small;
+    }
+    @include e(button-wrapper) {
+      height: $--slider-button-wrapper-size-small;
+      width: $--slider-button-wrapper-size-small;
+      top: $--slider-button-wrapper-offset-small;
+    }
+    @include e(bar) {
+      height: $--slider-height-small;
+      border-top-left-radius: $--slider-border-radius-small;
+      border-bottom-left-radius: $--slider-border-radius-small;
+    }
+    @include e(button) {
+      width: $--slider-button-size-small;
+      height: $--slider-button-size-small;
+    }
+  }
+
   @include e(runway) {
     width: 100%;
     height: $--slider-height;

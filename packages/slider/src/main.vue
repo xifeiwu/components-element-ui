@@ -1,6 +1,5 @@
 <template>
-  <div class="el-slider"
-    :class="{ 'is-vertical': vertical, 'el-slider--with-input': showInput }"
+  <div :class="['el-slider', size ? `el-slider--${size}`:'',{'is-vertical': vertical, 'el-slider--with-input': showInput }]"
      role="slider"
      :aria-valuemin="min"
      :aria-valuemax="max"
@@ -70,6 +69,10 @@
     },
 
     props: {
+      size: {
+        type: String,
+        default: ''
+      },
       min: {
         type: Number,
         default: 0
