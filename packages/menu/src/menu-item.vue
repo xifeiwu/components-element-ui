@@ -23,8 +23,7 @@
       </div>
     </el-tooltip>
     <template v-else>
-      <slot></slot>
-      <slot name="title"></slot>
+      <slot></slot><slot name="title"></slot>
     </template>
   </li>
 </template>
