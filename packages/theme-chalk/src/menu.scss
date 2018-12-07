@@ -152,11 +152,11 @@
       position: relative;
       & .el-menu {
         position: absolute;
-        margin-left: 5px;
+        margin-left: 3px;
         top: 0;
         left: 100%;
         z-index: 10;
-        border: 1px solid $--border-color-light;
+        //border: 1px solid $--border-color-light;
         border-radius: $--border-radius-small;
         box-shadow: $--box-shadow-light;
       }
