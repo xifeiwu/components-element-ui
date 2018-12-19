@@ -153,6 +153,17 @@
       line-height: $--input-mini-height;
     }
   }
+  @include m(mini-extral) {
+    font-size: $--input-mini-extral-font-size;
+
+    @include e(inner) {
+      height: $--input-mini-extral-height;
+    }
+
+    .el-input__icon {
+      line-height: $--input-mini-extral-height;
+    }
+  }
 }
 
 @include b(input-group) {

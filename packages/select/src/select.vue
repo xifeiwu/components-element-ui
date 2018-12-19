@@ -120,7 +120,8 @@
   const sizeMap = {
     'medium': 36,
     'small': 32,
-    'mini': 28
+    'mini': 28,
+    'mini-extral': 26
   };
 
   export default {
