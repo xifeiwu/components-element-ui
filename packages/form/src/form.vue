@@ -85,13 +85,15 @@
         // if no callback, return promise
         if (typeof callback !== 'function' && window.Promise) {
           promise = new window.Promise((resolve, reject) => {
-            callback = function(valid) {
-              valid ? resolve(valid) : reject(valid);
+            callback = function(valid, errors) {
+              valid ? resolve([valid, null]) : reject([valid, errors]);
             };
           });
         }
 
         let valid = true;
+        let fieldErrors = [];
+
         let count = 0;
         // 如果需要验证的fields为空，调用验证时立刻返回callback
         if (this.fields.length === 0 && callback) {
@@ -100,10 +102,11 @@
         this.fields.forEach((field, index) => {
           field.validate('', errors => {
             if (errors) {
+              fieldErrors.push(errors);
               valid = false;
             }
             if (typeof callback === 'function' && ++count === this.fields.length) {
-              callback(valid);
+              callback(valid, fieldErrors);
             }
           });
         });

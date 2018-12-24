@@ -71,7 +71,11 @@
         type: Boolean,
         default: true
       },
-      size: String
+      size: String,
+      multiFields: {
+        type: Boolean,
+        default: false,
+      }
     },
     watch: {
       error(value) {
@@ -136,14 +140,18 @@
         let rules = this.getRules();
         let isRequired = false;
 
-        if (rules && rules.length) {
-          rules.every(rule => {
-            if (rule.required) {
-              isRequired = true;
-              return false;
-            }
-            return true;
-          });
+        if (!this.multiFields) {
+          if (rules && rules.length) {
+            rules.every(rule => {
+              if (rule.required) {
+                isRequired = true;
+                return false;
+              }
+              return true;
+            });
+          }
+        } else {
+          isRequired = rules['required'];
         }
         return isRequired;
       },
@@ -189,7 +197,7 @@
           this.validateState = !errors ? 'success' : 'error';
           this.validateMessage = errors ? errors[0].message : '';
 
-          callback(this.validateMessage);
+          callback(errors);
         });
       },
       clearValidate() {
@@ -219,20 +227,42 @@
         }
       },
       getRules() {
+        var rules = null;
         var formRules = this.form.rules;
         var selfRules = this.rules;
         var requiredRule = this.required !== undefined ? { required: !!this.required } : [];
 
         formRules = formRules ? formRules[this.prop] : [];
 
-        return [].concat(selfRules || formRules || []).concat(requiredRule);
+        if (!this.multiFields) {
+          rules = [].concat(selfRules || formRules || []).concat(requiredRule);
+        } else {
+          if (selfRules) {
+            rules = selfRules
+          } else if (formRules) {
+            rules = formRules
+          }
+        }
+        return rules;
       },
+
       getFilteredRule(trigger) {
         var rules = this.getRules();
+        if (trigger === '') {
+          return rules;
+        }
 
-        return rules.filter(rule => {
-          return !rule.trigger || rule.trigger.indexOf(trigger) !== -1;
-        });
+        var filteredRules = [];
+
+        if (!this.multiFields) {
+          filteredRules = rules.filter(rule => {
+            return !rule.trigger || rule.trigger.indexOf(trigger) !== -1;
+          });
+        } else if (!rules.hasOwnProperty('trigger') || rules['trigger'].indexOf(trigger) >= -1) {
+          filteredRules = rules;
+        }
+
+        return filteredRules;
       },
       onFieldBlur() {
         this.validate('blur');
@@ -258,9 +288,14 @@
           value: initialValue
         });
 
-        let rules = this.getRules();
+        const rules = this.getRules();
 
-        if (rules.length || this.required !== undefined) {
+        if (!this.multiFields) {
+          if (rules.length || this.required !== undefined) {
+            this.$on('el.form.blur', this.onFieldBlur);
+            this.$on('el.form.change', this.onFieldChange);
+          }
+        } else if(rules) {
           this.$on('el.form.blur', this.onFieldBlur);
           this.$on('el.form.change', this.onFieldChange);
         }
