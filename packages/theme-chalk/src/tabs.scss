@@ -231,44 +231,38 @@
       padding: 15px;
     }
     >.el-tabs__header {
-      background-color: $--background-color-base;
+      //background-color: $--background-color-base;
       border-bottom: 1px solid $--border-color-light;
       margin: 0;
-      padding: 0px 8px;
+      padding: 0px 12px;
     }
     > .el-tabs__header .el-tabs__nav-wrap::after {
       content: none;
     }
     >.el-tabs__header .el-tabs__item {
-      //transition: all .3s cubic-bezier(.645,.045,.355,1);
       line-height: 28px;
       height: 30px;
-      box-sizing: border-box;
       font-size: 14px;
-      font-weight: normal;
-      padding: 0px 8px;
-      border: 1px solid transparent;
-      //margin: -1px -1px 0;
-      color: $--color-text-secondary;
+      font-weight: 500;
+      //font-weight: normal;
+      padding: 0px 14px;
+      margin: 0px 3px;
+      border: 1px solid $--border-color-base;
+      //color: $--color-text-secondary;
       //color: #007bff;
-      color: $--color-primary;
+      //color: $--color-primary;
+      color: #878d99;
+
+      border-top-left-radius: 3px;
+      border-top-right-radius: 3px;
 
       &.is-active {
-        //color: $--color-primary;
+        font-weight: 500;
         color: #495057;
         background-color: $--color-white;
-        border-right-color: $--border-color-base;
-        border-left-color: $--border-color-base;
         border-top: 2px solid #E6A23C;
-        &:hover {
-          border-top: 2px solid #E6A23C;
-          border-radius: 0px;
-        }
-      }
-      &:hover {
-        border-color: #ddd;
         border-bottom: transparent;
-        border-radius: 3px;
+        border-radius: 0px;
       }
     }
   }
