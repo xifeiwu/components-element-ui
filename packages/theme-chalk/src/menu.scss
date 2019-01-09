@@ -211,6 +211,10 @@
       vertical-align: middle;
     }
 
+    i {
+      color: $--color-text-secondary;
+    }
+
     i.el-submenu__icon-arrow {
       color: $--color-text-secondary;
     }
