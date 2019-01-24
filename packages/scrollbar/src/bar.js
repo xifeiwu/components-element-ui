@@ -11,6 +11,12 @@ export default {
     move: Number
   },
 
+  data() {
+    return {
+      cursorDown: false,
+    }
+  },
+
   computed: {
     bar() {
       return BAR_MAP[this.vertical ? 'vertical' : 'horizontal'];
@@ -22,11 +28,11 @@ export default {
   },
 
   render(h) {
-    const { size, move, bar } = this;
+    const { size, move, bar, cursorDown } = this;
 
     return (
       <div
-        class={ ['el-scrollbar__bar', 'is-' + bar.key] }
+        class={ ['el-scrollbar__bar', 'is-' + bar.key, cursorDown ? 'cursor-down':''] }
         onMousedown={ this.clickTrackHandler } >
         <div
           ref="thumb"
@@ -40,6 +46,10 @@ export default {
 
   methods: {
     clickThumbHandler(e) {
+      if( event.ctrlKey || event.button == 2 ) {
+        return;
+      }
+
       this.startDrag(e);
       this[this.bar.axis] = (e.currentTarget[this.bar.offset] - (e[this.bar.client] - e.currentTarget.getBoundingClientRect()[this.bar.direction]));
     },
