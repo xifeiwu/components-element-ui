@@ -234,18 +234,19 @@
       //background-color: $--background-color-base;
       border-bottom: 1px solid $--border-color-light;
       margin: 0;
-      padding: 0px 12px;
+      padding: 0px 6px;
     }
     > .el-tabs__header .el-tabs__nav-wrap::after {
       content: none;
     }
     >.el-tabs__header .el-tabs__item {
-      line-height: 28px;
-      height: 30px;
+      min-width: 160px;
+      text-align: center;
+      line-height: 24px;
+      height: 26px;
       font-size: 14px;
-      font-weight: 500;
-      //font-weight: normal;
-      padding: 0px 14px;
+      font-weight: 400;
+      padding: 0px 12px;
       margin: 0px 3px;
       border: 1px solid $--border-color-base;
       //color: $--color-text-secondary;
@@ -260,9 +261,9 @@
         font-weight: 500;
         color: #495057;
         background-color: $--color-white;
-        border-top: 2px solid #E6A23C;
+        borde-top: 1px solid #E6A23C;
         border-bottom: transparent;
-        border-radius: 0px;
+        //border-radius: 0px;
       }
     }
   }
@@ -276,7 +277,7 @@
       padding-left: 20px;
     }
     &.el-tabs--border-tab .el-tabs__item:nth-child(2) {
-      padding-left: 8px;
+      padding-left: 12px;
     }
   }
   @include m(bottom) {
