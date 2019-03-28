@@ -3,3 +3,5 @@ dist/
 .sass-cache
 .idea
 server/logs
+
+packages/theme-chalk/src/profile.scss
