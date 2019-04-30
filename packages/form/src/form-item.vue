@@ -83,6 +83,17 @@
       }
     },
     computed: {
+      propList() {
+        var props = [];
+        if (this.prop) {
+          if (Array.isArray(this.prop)) {
+            props = this.prop;
+          } else if (this.prop.split) {
+            props = this.prop.split('.');
+          }
+        }
+        return props;
+      },
       labelFor() {
         return this.for || this.prop;
       },
@@ -133,7 +144,7 @@
         }
       },
       isRequired() {
-        let rules = this.getRules();
+        let rules = this.getRulesList();
         let isRequired = false;
 
         if (rules && rules.length) {
@@ -169,7 +180,7 @@
     methods: {
       validate(trigger, callback = noop) {
         this.validateDisabled = false;
-        var rules = this.getFilteredRule(trigger);
+        var rules = this.getFilteredRulesList(trigger);
         if ((!rules || rules.length === 0) && this.required === undefined) {
           callback();
           return true;
@@ -188,8 +199,7 @@
         validator.validate(model, { firstFields: true }, (errors, fields) => {
           this.validateState = !errors ? 'success' : 'error';
           this.validateMessage = errors ? errors[0].message : '';
-
-          callback(this.validateMessage);
+          callback(errors, fields);
         });
       },
       clearValidate() {
@@ -218,22 +228,85 @@
           prop.o[prop.k] = this.initialValue;
         }
       },
-      getRules() {
+
+      getRule() {
         var formRules = this.form.rules;
         var selfRules = this.rules;
         var requiredRule = this.required !== undefined ? { required: !!this.required } : [];
 
-        formRules = formRules ? formRules[this.prop] : [];
+        // do not split this.prop if it is a keyword of form.rules
+        if (formRules && formRules[this.prop]) {
+          formRules = formRules ? formRules[this.prop] : [];
+          return [].concat(selfRules || formRules || []).concat(requiredRule);
+        }
 
-        return [].concat(selfRules || formRules || []).concat(requiredRule);
+        if (this.propList.length >= 2) {
+          const level1 = this.propList[0];
+          const level2 = this.propList[1];
+          var origin = formRules[level1];
+          var fieldsRule = {};
+          for (let key in origin) {
+            fieldsRule[key] = origin[key];
+          }
+          fieldsRule.fields = {};
+          fieldsRule.fields[level2] = [];
+          if (origin && origin.hasOwnProperty('fields') && origin.fields[level2]) {
+            fieldsRule.fields[level2] = [].concat(selfRules || origin.fields[level2] || []).concat(requiredRule);
+          }
+          return fieldsRule;
+        } else {
+          return null;
+        }
       },
+      getRulesList() {
+        var rule = this.getRule();
+        if (rule && rule.hasOwnProperty('fields')) {
+          const level2 = this.propList[1];
+          return rule.fields[level2];
+        } else {
+          return rule;
+        }
+      },
+
+      getFilteredRulesList(trigger) {
+        var rule = this.getRule();
+        if (rule && rule.hasOwnProperty('fields')) {
+          const level2 = this.propList[1];
+          var result = {};
+          for (let key in rule) {
+            result[key] = rule[key];
+          }
+          result.fields[level2] = this.filterRuleByTrigger(trigger, result.fields[level2]);
+          return result.fields[level2];
+        } else {
+          return this.filterRuleByTrigger(trigger, rule);
+        }
+      },
+
       getFilteredRule(trigger) {
-        var rules = this.getRules();
-
-        return rules.filter(rule => {
-          return !rule.trigger || rule.trigger.indexOf(trigger) !== -1;
-        });
+        var rule = this.getRule();
+        if (rule && rule.hasOwnProperty('fields')) {
+          const level2 = this.propList[1];
+          var result = {};
+          for (let key in rule) {
+            result[key] = rule[key];
+          }
+          result.fields[level2] = this.filterRuleByTrigger(trigger, result.fields[level2]);
+          return result;
+        } else {
+          return this.filterRuleByTrigger(trigger, rule);
+        }
       },
+      filterRuleByTrigger(trigger, rules) {
+        if (!trigger) {
+          return rules;
+        } else {
+          return rules.filter(rule => {
+            return !rule.trigger || rule.trigger.indexOf(trigger) !== -1;
+          });
+        }
+      },
+
       onFieldBlur() {
         this.validate('blur');
       },
@@ -258,7 +331,7 @@
           value: initialValue
         });
 
-        let rules = this.getRules();
+        let rules = this.getRulesList();
 
         if (rules.length || this.required !== undefined) {
           this.$on('el.form.blur', this.onFieldBlur);

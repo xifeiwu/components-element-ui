@@ -85,25 +85,39 @@
         // if no callback, return promise
         if (typeof callback !== 'function' && window.Promise) {
           promise = new window.Promise((resolve, reject) => {
-            callback = function(valid) {
-              valid ? resolve(valid) : reject(valid);
+            callback = function(valid, errors, fields) {
+              valid ? resolve([valid, null, null]) : reject([valid, errors, fields]);
             };
           });
         }
 
         let valid = true;
+        var errorsList = [];
+        const fieldsMap = {};
+
+
         let count = 0;
         // 如果需要验证的fields为空，调用验证时立刻返回callback
         if (this.fields.length === 0 && callback) {
           callback(true);
         }
         this.fields.forEach((field, index) => {
-          field.validate('', errors => {
+          field.validate('', (errors, fields) => {
             if (errors) {
+              if (Array.isArray(errors)) {
+                errorsList = errorsList.concat(errors);
+              } else {
+                errorsList.push(errors);
+              }
               valid = false;
             }
+            if (fields) {
+              for (let key in fields) {
+                fieldsMap[key] = fields[key];
+              }
+            }
             if (typeof callback === 'function' && ++count === this.fields.length) {
-              callback(valid);
+              callback(valid, errorsList, fieldsMap);
             }
           });
         });
