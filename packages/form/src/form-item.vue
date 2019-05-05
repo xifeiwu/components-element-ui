@@ -333,7 +333,7 @@
 
         let rules = this.getRulesList();
 
-        if (rules.length || this.required !== undefined) {
+        if ((rules && rules.length) || this.required !== undefined) {
           this.$on('el.form.blur', this.onFieldBlur);
           this.$on('el.form.change', this.onFieldChange);
         }
