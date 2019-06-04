@@ -301,9 +301,9 @@
         if (!trigger) {
           return rules;
         } else {
-          return rules.filter(rule => {
+          return rules && Array.isArray(rules) ? rules.filter(rule => {
             return !rule.trigger || rule.trigger.indexOf(trigger) !== -1;
-          });
+          }) : rules;
         }
       },
 
