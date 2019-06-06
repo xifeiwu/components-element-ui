@@ -1,7 +1,7 @@
 <template>
   <div
     class="el-select"
-    :class="[selectSize ? 'el-select--' + selectSize : '']"
+    :class="[selectSize ? 'el-select--' + selectSize : '', multiple ? 'is-multiple' : '']"
     v-clickoutside="handleClose">
     <div
       class="el-select__tags"
