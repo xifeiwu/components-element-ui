@@ -125,6 +125,7 @@
       selectOptionClick() {
         if (this.disabled !== true && this.groupDisabled !== true) {
           this.dispatch('ElSelect', 'handleOptionClick', this);
+          this.dispatch('ElSelectCustom', 'handleOptionClick', this);
         }
       },
 
