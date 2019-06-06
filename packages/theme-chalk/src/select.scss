@@ -17,6 +17,30 @@
     }
   }
 
+  @include m(small) {
+    font-size: $--input-small-font-size;
+    height: $--input-small-height;
+    @include when(multiple) {
+      height: auto;
+    }
+  }
+
+  @include m(mini) {
+    font-size: $--input-mini-font-size;
+    height: $--input-mini-height;
+    @include when(multiple) {
+      height: auto;
+    }
+  }
+
+  @include m(mini-extral) {
+    font-size: $--input-mini-extral-font-size;
+    height: $--input-mini-extral-height;
+    @include when(multiple) {
+      height: auto;
+    }
+  }
+
   .el-input__inner {
     cursor: pointer;
     padding-right: 35px;
