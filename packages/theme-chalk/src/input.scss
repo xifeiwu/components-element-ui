@@ -149,7 +149,7 @@
       height: $--input-mini-height;
     }
 
-    .el-input__icon {
+    .el-input__prefix, .el-input__suffix, .el-input__icon {
       line-height: $--input-mini-height;
     }
   }
@@ -160,7 +160,7 @@
       height: $--input-mini-extral-height;
     }
 
-    .el-input__icon {
+    .el-input__prefix, .el-input__suffix, .el-input__icon {
       line-height: $--input-mini-extral-height;
     }
   }
