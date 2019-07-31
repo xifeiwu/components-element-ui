@@ -182,6 +182,7 @@
         this.validateDisabled = false;
         var rules = this.getFilteredRulesList(trigger);
         if ((!rules || rules.length === 0) && this.required === undefined) {
+          this.clearValidate();
           callback();
           return true;
         }
