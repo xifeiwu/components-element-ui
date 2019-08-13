@@ -6,6 +6,7 @@
 <script>
   export default {
     name: 'ElBreadcrumb',
+    componentName: 'ElBreadcrumb',
 
     props: {
       separator: {
@@ -29,6 +30,9 @@
       if (items.length) {
         items[items.length - 1].setAttribute('aria-current', 'page');
       }
+      this.$on('el.breadcrumb.item-click', (item) => {
+        this.$emit('item-click', item);
+      });
     }
   };
 </script>

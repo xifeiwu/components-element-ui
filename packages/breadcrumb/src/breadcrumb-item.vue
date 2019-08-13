@@ -8,10 +8,16 @@
   </span>
 </template>
 <script>
+  import emitter from 'element-ui/src/mixins/emitter';
   export default {
     name: 'ElBreadcrumbItem',
+    mixins: [emitter],
     props: {
       to: {},
+      item: {
+        type: Object,
+        default: null
+      },
       replace: Boolean
     },
     data() {
@@ -27,15 +33,17 @@
       this.separator = this.elBreadcrumb.separator;
       this.separatorClass = this.elBreadcrumb.separatorClass;
       let self = this;
-      if (this.to) {
-        let link = this.$refs.link;
-        link.setAttribute('role', 'link');
-        link.addEventListener('click', _ => {
-          let to = this.to;
-          self.replace ? self.$router.replace(to)
-                       : self.$router.push(to);
-        });
-      }
+      let link = this.$refs.link;
+      link.setAttribute('role', 'link');
+      link.addEventListener('click', _ => {
+        if (this.to) {
+          self.replace ? self.$router.replace(this.to)
+            : self.$router.push(this.to);
+        }
+        if (this.item) {
+          this.dispatch('ElBreadcrumb', 'el.breadcrumb.item-click', this.item);
+        }
+      });
     }
   };
 </script>
