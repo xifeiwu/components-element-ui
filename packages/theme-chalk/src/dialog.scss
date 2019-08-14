@@ -36,7 +36,6 @@
 
   @include e(header) {
     padding: $--dialog-padding-primary;
-    padding-bottom: 10px;
   }
 
   @include e(headerbtn) {
@@ -48,7 +47,8 @@
     border: none;
     outline: none;
     cursor: pointer;
-    font-size: $--message-close-size;
+    font-size: $--font-size-middle;
+    line-height: $--dialog-line-height;
 
     .el-dialog__close {
       color: $--color-info;
@@ -63,12 +63,12 @@
 
   @include e(title) {
     line-height: $--dialog-line-height;
-    font-size: $--dialog-title-font-size;
+    font-size: $--font-size-middle;
+    font-weight: bold;
     color: $--color-text-primary;
   }
 
   @include e(body) {
-    //padding: 30px 20px;
     padding: 10px 15px;
     color: $--color-text-regular;
     line-height: $--dialog-line-height;
@@ -76,8 +76,7 @@
   }
 
   @include e(footer) {
-    padding: 10px $--dialog-padding-primary;
-    //padding-top: 10px;
+    padding: $--dialog-padding-primary;
     text-align: right;
     box-sizing: border-box;
   }

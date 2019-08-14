@@ -83,10 +83,12 @@ $--fill-base: $--color-white !default;
 $--font-path: 'fonts' !default;
 $--font-size-base: 14px !default;
 $--font-size-small: 12px !default;
+$--font-size-middle: 16px !default;
 $--font-size-large: 18px !default;
 $--font-color-disabled-base: #bbb !default;
 $--font-weight-primary: 500 !default;
 $--font-line-height-primary: 24px !default;
+$--font-line-height-one-percent: 1 !default;
 
 /* Size
 -------------------------- */
@@ -471,8 +473,8 @@ $--dialog-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) !default;
 $--dialog-close-hover-color: $--color-primary !default;
 $--dialog-title-font-size: $--font-size-large !default;
 $--dialog-font-size: 14px !default;
-$--dialog-line-height: $--font-line-height-primary !default;
-$--dialog-padding-primary: 15px !default;
+$--dialog-line-height: $--font-line-height-one-percent !default;
+$--dialog-padding-primary: 8px !default;
 
 /* Table
 -------------------------- */
