@@ -35,7 +35,7 @@
   }
 
   @include e(header) {
-    padding: $--dialog-padding-primary;
+    padding: 6px $--dialog-padding-primary;
   }
 
   @include e(headerbtn) {
@@ -69,7 +69,7 @@
   }
 
   @include e(body) {
-    padding: 10px 15px;
+    padding: 2px;
     color: $--color-text-regular;
     line-height: $--dialog-line-height;
     font-size: $--dialog-font-size;
