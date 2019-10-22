@@ -167,7 +167,7 @@ export default {
       render(h) {
         return (
           <span class="el-pagination__sizes">
-            <el-select
+            <el-select size="mini"
               value={ this.$parent.internalPageSize }
               popperClass={ `${this.$parent.popperClass || ''} is-arrow-fixed` }
               on-input={ this.handleChange }>
