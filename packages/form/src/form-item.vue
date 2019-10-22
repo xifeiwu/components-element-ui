@@ -239,9 +239,7 @@
         if (formRules && formRules[this.prop]) {
           formRules = formRules ? formRules[this.prop] : [];
           return [].concat(selfRules || formRules || []).concat(requiredRule);
-        }
-
-        if (this.propList.length >= 2) {
+        } else if (this.propList.length >= 2) {
           const level1 = this.propList[0];
           const level2 = this.propList[1];
           var origin = formRules[level1];
@@ -255,6 +253,8 @@
             fieldsRule.fields[level2] = [].concat(selfRules || origin.fields[level2] || []).concat(requiredRule);
           }
           return fieldsRule;
+        } else if (selfRules) {
+          return [].concat(selfRules || []).concat(requiredRule);
         } else {
           return null;
         }
