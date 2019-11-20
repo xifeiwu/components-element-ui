@@ -44,6 +44,11 @@ export default {
       }
     },
 
+    size: {
+      type:String,
+      default: 'mini'
+    },   // size for pagination
+
     popperClass: String,
 
     prevText: String,
@@ -77,10 +82,10 @@ export default {
     }] }></div>;
     const TEMPLATE_MAP = {
           prev: <prev></prev>,
-      jumper: <jumper></jumper>,
-    pager: <pager currentPage={ this.internalCurrentPage } pageCount={ this.internalPageCount } pagerCount={ this.pagerCount } on-change={ this.handleCurrentChange } disabled={ this.disabled }></pager>,
+      jumper: <jumper size={this.size}></jumper>,
+      pager: <pager currentPage={ this.internalCurrentPage } pageCount={ this.internalPageCount } pagerCount={ this.pagerCount } on-change={ this.handleCurrentChange } disabled={ this.disabled }></pager>,
       next: <next></next>,
-      sizes: <sizes pageSizes={ this.pageSizes }></sizes>,
+      sizes: <sizes pageSizes={ this.pageSizes } size={this.size}></sizes>,
       slot: <slot>{ this.$slots.default ? this.$slots.default : '' }</slot>,
       total: <total></total>
   };
@@ -151,7 +156,11 @@ export default {
       mixins: [Locale],
 
       props: {
-        pageSizes: Array
+        pageSizes: Array,
+        size: {
+          type: String,
+          default: 'small'
+        }
       },
 
       watch: {
@@ -174,7 +183,7 @@ export default {
           <el-select
         value={ this.$parent.internalPageSize }
         popperClass={ this.$parent.popperClass || '' }
-        size="mini"
+        size={this.size}
         on-input={ this.handleChange }
         disabled={ this.$parent.disabled }>
         {
@@ -209,6 +218,13 @@ export default {
 
     Jumper: {
       mixins: [Locale],
+
+      props: {
+        size: {
+          type: String,
+          default: 'small'
+        }
+      },
 
       components: { ElInput },
 
@@ -247,7 +263,7 @@ export default {
         return (
           <span class="el-pagination__jump">
           { this.t('el.pagination.goto') }
-      <el-input
+      <el-input size={this.size}
       class="el-pagination__editor is-in-pagination"
         min={ 1 }
         max={ this.$parent.internalPageCount }
