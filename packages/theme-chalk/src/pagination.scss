@@ -135,7 +135,7 @@
     color: $--color-text-regular;
 
     .el-input .el-input__inner {
-      font-size: $--pagination-font-size;
+      //font-size: $--pagination-font-size;
       padding-left: 8px;
 
       &:hover {
@@ -192,7 +192,7 @@
       margin: 0 5px;
       background-color: $--color-info-lighter;
       color: $--color-text-regular;
-      min-width: 30px;
+      min-width: $--pagination-button-width;
       border-radius: 2px;
 
       &.disabled {
@@ -259,7 +259,7 @@
 
     &.btn-quicknext,
     &.btn-quickprev {
-      line-height: 28px;
+      line-height: $--pagination-button-height;
       color: $--pagination-button-color;
 
       &.disabled {
