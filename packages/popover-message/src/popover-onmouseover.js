@@ -17,7 +17,7 @@ document.body.appendChild(popper.$el);
 export default {
   bind(el, binding, vnode) {
     el.addEventListener('mouseenter', evt => {
-      if (evt.target === el) {
+      if (evt.target === el && binding.value) {
         popper.show({
           ref: el,
           msg: binding.value

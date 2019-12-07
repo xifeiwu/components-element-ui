@@ -31,7 +31,7 @@
 
   export default {
 //    mixins: [Popper],
-    name: 'customPopoverMessage',
+    name: 'CustomPopoverMessage',
 
     props: {
       title: String,
