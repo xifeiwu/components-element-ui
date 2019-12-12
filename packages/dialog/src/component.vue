@@ -5,6 +5,8 @@
         class="el-dialog"
         :class="[{ 'is-fullscreen': fullscreen, 'el-dialog--center': center }, customClass]"
         ref="dialog"
+        v-loading="loading"
+        element-loading-spinner="el-icon-loading"
         :style="style">
         <div class="el-dialog__header">
           <slot name="title">
@@ -42,6 +44,10 @@
       title: {
         type: String,
         default: ''
+      },
+      loading: {
+        type: Boolean,
+        default: false
       },
 
       modal: {
